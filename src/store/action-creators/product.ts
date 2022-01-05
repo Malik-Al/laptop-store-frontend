@@ -15,3 +15,17 @@ export const fetchProduct = () => {
     }
 
 }
+
+export const fetchGetProduct = (id: string) => {
+    return async (dispatch: Dispatch<ProductAction>) => {
+        try {
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS})
+            const response = await axios.get(`http://localhost:5000/product/${id}`)
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS, payload: response.data})
+        }catch (e){
+            console.log(e)
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR, payload: 'Error product get one request'})
+        }
+    }
+
+}

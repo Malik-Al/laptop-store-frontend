@@ -1,19 +1,17 @@
 import React, {useEffect} from 'react';
 import ProductItem from "../ProductItem/ProductItem";
 import {useTypeSelector} from "../../../hooks/useTypeSelector";
-import {useDispatch} from "react-redux";
 import {fetchProduct} from "../../../store/action-creators/product";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
-
-
+import {useActions} from "../../../hooks/useActions";
 
 
 const ProductList = () => {
     const {products, loading, error} = useTypeSelector(state => state.product)
-    const dispatch = useDispatch()
+    const {fetchProduct} = useActions()
 
     useEffect(() => {
-        dispatch(fetchProduct())
+        fetchProduct()
     }, [])
 
     if(loading){
@@ -29,8 +27,8 @@ const ProductList = () => {
             <ButtonAppBar>
                 <div style={{display: 'flex', flexWrap: "wrap"}}>
                     {products.map((product, id) =>
-                        <ProductItem key={id} product={product}/>
-                    )}
+                        <ProductItem key={id} product={product}/>,
+                        )}
                 </div>
             </ButtonAppBar>
         </>
