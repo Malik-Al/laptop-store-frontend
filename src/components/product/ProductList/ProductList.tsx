@@ -4,6 +4,7 @@ import {useTypeSelector} from "../../../hooks/useTypeSelector";
 import {fetchProduct} from "../../../store/action-creators/product";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import {useActions} from "../../../hooks/useActions";
+import {Box, CircularProgress} from "@mui/material";
 
 
 const ProductList = () => {
@@ -14,11 +15,20 @@ const ProductList = () => {
         fetchProduct()
     }, [])
 
+
     if(loading){
-        return <div>Идет загрузка</div>
+        return (
+             <Box sx={{display: 'flex', justifyContent: 'center', marginTop: '400px'}}>
+                <CircularProgress/>
+             </Box>
+        )
     }
+
+
     if(error){
-        return <div>{error} Произошла ошибка</div>
+        return <div style={{display: 'flex', fontSize: '30px',justifyContent: 'center', marginTop: '400px'}}>
+            {error} Произошла ошибка
+        </div>
     }
 
 

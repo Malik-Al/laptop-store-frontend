@@ -15,6 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {FC} from "react";
+import ComputerIcon from '@mui/icons-material/Computer';
 
 const drawerWidth = 200;
 
@@ -33,10 +34,10 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
         <div>
             <Toolbar />
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Acer', 'Asus', 'Lenova', 'Dell'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            {index % 2 === 0 ? <ComputerIcon /> : <ComputerIcon />}
                         </ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
@@ -90,7 +91,6 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 aria-label="mailbox folders"
             >
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
                     container={container}
                     variant="temporary"

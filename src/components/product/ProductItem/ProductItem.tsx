@@ -33,11 +33,11 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
         <Grid onClick={handleClick}>
             <Grid >
                 <ListItem className='card'>
-                    <img width={200} height={170} src={`http://localhost:5000/` + product.picture}/>
+                    <img width={200} height={155} src={`http://localhost:5000/` + product.picture}/>
                 </ListItem>
             </Grid>
             <div className='card__title'>
-                <h4>{product.price}</h4>
+                <h4>{product.price} p</h4>
                 <div>{product.name}</div>
             </div>
         </Grid>

@@ -1,0 +1,9 @@
+.productCard{
+  display: flex;
+  &__img{
+    padding: 20px;
+  }
+  &__content{
+    padding: 20px;
+  }
+}
