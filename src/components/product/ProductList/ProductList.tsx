@@ -35,7 +35,7 @@ const ProductList = () => {
     return (
         <>
             <ButtonAppBar>
-                <div style={{display: 'flex', flexWrap: "wrap"}}>
+                <div style={{display: 'flex',flexWrap: "wrap"}}>
                     {products.map((product, id) =>
                         <ProductItem key={id} product={product}/>,
                         )}

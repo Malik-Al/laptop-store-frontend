@@ -4,6 +4,7 @@ import axios from "axios";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import './productDetail.scss'
 import {Button, ImageList, ImageListItem, Typography} from "@mui/material";
+import {fetchGetProduct} from "../../../store/action-creators/product";
 
 type ProductType = {
     id: string,
