@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState, memo} from 'react';
 import {Button, Grid, ImageList, ImageListItem, ListItem, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import './productItem.scss'
@@ -34,30 +34,27 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
     async function productDelete() {
         await fetchDeleteProduct(product.id)
     }
-
-    useEffect(() => {
-
-    },[])
+    
 
     return (
         <>
             <Grid className='card'>
                 <ImageList onClick={handleClick} sx={{ width: 300, height: 300, padding: '10px'}} cols={3} rowHeight={164}>
-                    <ImageListItem sx={{width: '300%'}}>
-                        {product.id &&
-                            <img
-                                src={`${`http://localhost:5000/`+product.picture}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${`http://localhost:5000/`+product.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                loading="lazy"
-                            />
-                        }
-                    </ImageListItem>
+                    {/*<ImageListItem sx={{width: '300%'}}>*/}
+                    {/*    {product.id &&*/}
+                    {/*        <img*/}
+                    {/*            src={`${`http://localhost:5000/`+product.picture}?w=164&h=164&fit=crop&auto=format`}*/}
+                    {/*            srcSet={`${`http://localhost:5000/`+product.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}*/}
+                    {/*            loading="lazy"*/}
+                    {/*        />*/}
+                    {/*    }*/}
+                    {/*</ImageListItem>*/}
                 </ImageList>
                 <div className='card__title'>
                     <h4>{product.price} p</h4>
                     <div>{product.name}</div>
                 </div>
-                <Stack id={product.id} onClick={() => productDelete()} direction="row" spacing={2}>
+                <Stack id={product.id} onClick={productDelete} direction="row" spacing={2}>
                     <Button  variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
@@ -66,7 +63,7 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
         </>
 
     );
-};
+}
 
 
 export default ProductItem;

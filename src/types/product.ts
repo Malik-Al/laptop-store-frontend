@@ -36,7 +36,7 @@ interface FetchProductsActionDelete {
 
 interface FetchProductsSuccessActionDelete {
     type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_DELETE,
-    payload: any[]
+    payload: number
 }
 
 interface FetchProductsErrorActionDelete {
