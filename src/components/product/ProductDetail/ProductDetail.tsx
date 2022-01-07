@@ -4,14 +4,15 @@ import axios from "axios";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import './productDetail.scss'
 import {Button, ImageList, ImageListItem, Typography} from "@mui/material";
-import {fetchGetProduct} from "../../../store/action-creators/product";
+import {useActions} from "../../../hooks/useActions";
+import {useTypeSelector} from "../../../hooks/useTypeSelector";
 
 type ProductType = {
-    id: string,
-    name: string;
-    description: string;
-    picture: string;
-    price: number
+    id?: string,
+    name?: string;
+    description?: string;
+    picture?: string;
+    price?: number
 }
 
 
@@ -21,13 +22,19 @@ interface ProductsProps{
 
 
 
-const ProductDetail:FC<ProductsProps> = ({products}) => {
+const ProductDetail = () => {
+    const {fetchGetProduct} = useActions()
     const [productOne, setProductOne] = useState<any>('')
     const {search} = useLocation();
     const id = search.slice(1)
 
-    useEffect(() => {
+    const OneRequest = async () => {
         axios.get(`http://localhost:5000/product/${id}`).then(res => setProductOne(res.data))
+        // await fetchGetProduct(id)
+    }
+
+    useEffect(() => {
+        OneRequest()
     }, [])
 
 
@@ -36,33 +43,33 @@ const ProductDetail:FC<ProductsProps> = ({products}) => {
         <ButtonAppBar>
             <Link to={'/'} style={{ textDecoration: "none"}}><Button variant="outlined">Home</Button></Link>
             <div className='productCard'>
-                <div className='productCard__img'>
-                <ImageList sx={{ width: 500, height: 500}} cols={3} rowHeight={164}>
-                    <ImageListItem sx={{width: '250%'}}>
-                        {productOne.id &&
-                            <img
-                                src={`${`http://localhost:5000/`+productOne.picture}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${`http://localhost:5000/`+productOne.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                loading="lazy"
-                            />
-                         }
-                    </ImageListItem>
-                </ImageList>
-                </div>
-                <div className="productCard__content">
+                    <div className='productCard__img'>
+                        <ImageList sx={{ width: 500, height: 500}} cols={3} rowHeight={164}>
+                            <ImageListItem sx={{width: '250%'}}>
+                                {productOne.id &&
+                                    <img
+                                        src={`${`http://localhost:5000/`+productOne.picture}?w=164&h=164&fit=crop&auto=format`}
+                                        srcSet={`${`http://localhost:5000/`+productOne.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                        loading="lazy"
+                                    />
+                                }
+                            </ImageListItem>
+                        </ImageList>
+                    </div>
+                    <div className="productCard__content">
                     <Typography variant="h4" sx={{ paddingBottom: 3}}>
-                        {productOne.name}
+                {productOne.name}
                     </Typography >
                     <Typography variant="h5" sx={{ paddingBottom: 3}}>
-                        Описание:
+                    Описание:
                     </Typography>
                     <Typography sx={{ paddingBottom: 3}}>
-                        {productOne.description}
+                {productOne.description}
                     </Typography>
                     <Typography variant="h3" sx={{ paddingBottom: 5}}>
-                        Цена: {productOne.price} р
+                    Цена: {productOne.price} р
                     </Typography>
-                </div>
+                    </div>
             </div>
         </ButtonAppBar>
     );

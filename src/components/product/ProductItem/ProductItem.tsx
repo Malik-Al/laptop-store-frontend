@@ -1,9 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Button, Grid, ImageList, ImageListItem, ListItem, Stack} from "@mui/material";
+import React, {FC} from 'react';
+import {Button, Grid, ImageList, ImageListItem, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import './productItem.scss'
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import {useActions} from "../../../hooks/useActions";
 
 type ProductType = {
@@ -22,7 +21,6 @@ interface ProductsProps{
 const ProductItem: FC<ProductsProps> = ({product}) => {
     let navigate = useNavigate()
     const {fetchDeleteProduct} = useActions()
-    const [deleteFetch, setDeleteFetch] = useState<any>('')
 
     function handleClick() {
         navigate({
@@ -35,9 +33,7 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
         await fetchDeleteProduct(product.id)
     }
 
-    useEffect(() => {
 
-    },[])
 
     return (
         <>
@@ -57,8 +53,8 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
                     <h4>{product.price} p</h4>
                     <div>{product.name}</div>
                 </div>
-                <Stack id={product.id} onClick={() => productDelete()} direction="row" spacing={2}>
-                    <Button  variant="outlined" startIcon={<DeleteIcon />}>
+                <Stack direction="row" spacing={2}>
+                    <Button onClick={productDelete} variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
                 </Stack>
