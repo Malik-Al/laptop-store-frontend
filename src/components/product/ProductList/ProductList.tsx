@@ -33,7 +33,6 @@ const ProductList = () => {
 
 
     return (
-        <>
             <ButtonAppBar>
                 <div style={{display: 'flex',flexWrap: "wrap"}}>
                     {products.map((product, id) =>
@@ -41,8 +40,6 @@ const ProductList = () => {
                         )}
                 </div>
             </ButtonAppBar>
-        </>
-
     );
 };
 
