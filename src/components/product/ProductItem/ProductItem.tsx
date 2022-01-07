@@ -1,9 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Button, Grid, ImageList, ImageListItem, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 import './productItem.scss'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
+
 
 type ProductType = {
     id: string,
@@ -19,8 +21,10 @@ interface ProductsProps{
 
 
 const ProductItem: FC<ProductsProps> = ({product}) => {
+
     let navigate = useNavigate()
     const {fetchDeleteProduct} = useActions()
+
 
     function handleClick() {
         navigate({
@@ -57,6 +61,11 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
                     <Button onClick={productDelete} variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
+                    <Link to={'/create'} style={{ textDecoration: "none"}}>
+                        <Button  variant="contained" endIcon={<SendIcon />}>
+                            Create
+                        </Button>
+                    </Link>
                 </Stack>
             </Grid>
         </>

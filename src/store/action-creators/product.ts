@@ -45,3 +45,18 @@ export const fetchDeleteProduct = (id: string) => {
     }
 
 }
+
+//Product create
+export const fetchCreateProduct = (id: string) => {
+    return async (dispatch: Dispatch<ProductAction>) => {
+        try {
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_DELETE})
+            const response = await axios.post(`http://localhost:5000/product/`)
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_DELETE, payload: response.data})
+        }catch (e){
+            console.log(e)
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR_DELETE, payload: 'Error product delete request'})
+        }
+    }
+
+}
