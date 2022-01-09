@@ -16,6 +16,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {FC} from "react";
 import ComputerIcon from '@mui/icons-material/Computer';
+import {Link} from "react-router-dom";
+import {Button} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 const drawerWidth = 200;
 
@@ -84,6 +87,14 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                     <Typography variant="h6" noWrap component="div">
                         Responsive drawer
                     </Typography>
+                    <Link to={'/create'} style={{
+                        textDecoration: "none",
+                        marginLeft: '500px'
+                    }}>
+                        <Button  variant="contained" endIcon={<SendIcon />}>
+                            Create product
+                        </Button>
+                    </Link>
                 </Toolbar>
             </AppBar>
             <Box

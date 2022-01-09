@@ -9,7 +9,11 @@ export enum ProductActionTypes {
 
     FETCH_PRODUCTS_ONE = 'FETCH_PRODUCTS_ONE',
     FETCH_PRODUCTS_SUCCESS_ONE = 'FETCH_PRODUCTS_SUCCESS_ONE',
-    FETCH_PRODUCTS_ERROR_ONE = 'FETCH_PRODUCTS_ERROR_ONE'
+    FETCH_PRODUCTS_ERROR_ONE = 'FETCH_PRODUCTS_ERROR_ONE',
+
+    FETCH_PRODUCTS_CREATE = 'FETCH_PRODUCTS_CREATE',
+    FETCH_PRODUCTS_SUCCESS_CREATE = 'FETCH_PRODUCTS_SUCCESS_CREATE',
+    FETCH_PRODUCTS_ERROR_CREATE = 'FETCH_PRODUCTS_ERROR_CREATE'
 }
 
 
@@ -18,6 +22,8 @@ export interface ProductState {
     loading: boolean,
     error: null | string
 }
+
+
 // Product get all
 interface FetchProductsAction {
     type: ProductActionTypes.FETCH_PRODUCTS
@@ -32,6 +38,8 @@ interface FetchProductsErrorAction {
     type: ProductActionTypes.FETCH_PRODUCTS_ERROR,
     payload: string
 }
+
+
 // Product delete
 
 interface FetchProductsActionDelete {
@@ -47,6 +55,8 @@ interface FetchProductsErrorActionDelete {
     type: ProductActionTypes.FETCH_PRODUCTS_ERROR_DELETE,
     payload: string
 }
+
+
 // Product get one
 
 interface FetchProductsActionOne {
@@ -65,6 +75,22 @@ interface FetchProductsErrorActionOne {
 
 
 
+// create product
+
+interface FetchProductsActionCreate {
+    type: ProductActionTypes.FETCH_PRODUCTS_CREATE
+}
+
+interface FetchProductsSuccessActionCreate {
+    type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_CREATE,
+    payload: any[]
+}
+
+interface FetchProductsErrorActionCreate {
+    type: ProductActionTypes.FETCH_PRODUCTS_ERROR_CREATE,
+    payload: string
+}
+
 
 export type ProductAction =
     FetchProductsAction
@@ -73,6 +99,9 @@ export type ProductAction =
     | FetchProductsActionDelete
     | FetchProductsSuccessActionDelete
     | FetchProductsErrorActionDelete
-    |FetchProductsActionOne
-    |FetchProductsSuccessActionOne
-    |FetchProductsErrorActionOne
+    | FetchProductsActionOne
+    | FetchProductsSuccessActionOne
+    | FetchProductsErrorActionOne
+    | FetchProductsActionCreate
+    | FetchProductsSuccessActionCreate
+    | FetchProductsErrorActionCreate

@@ -8,6 +8,7 @@ const initialState: ProductState = {
 
 export const productReducer = (state = initialState, action: ProductAction): ProductState => {
     switch (action.type){
+
         // PRODUCTS
         case ProductActionTypes.FETCH_PRODUCTS:
             return {loading: true, error: null, products: []}
@@ -17,6 +18,7 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
 
         case ProductActionTypes.FETCH_PRODUCTS_ERROR:
             return {loading: false, error: action.payload, products: []}
+
 
         // DELETE
         case ProductActionTypes.FETCH_PRODUCTS_DELETE:
@@ -28,8 +30,8 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
         case ProductActionTypes.FETCH_PRODUCTS_ERROR_DELETE:
             return {loading: false, error: action.payload, products: []}
 
-        // GET ONE
 
+        // GET ONE
         case ProductActionTypes.FETCH_PRODUCTS_ONE:
             return {loading: true, error: null, products: []}
 
@@ -38,6 +40,18 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
 
         case ProductActionTypes.FETCH_PRODUCTS_ERROR_ONE:
             return {loading: false, error: action.payload, products: []}
+
+
+        // CREATE
+        case ProductActionTypes.FETCH_PRODUCTS_CREATE:
+            return {...state,loading: true, error: null}
+
+        case ProductActionTypes.FETCH_PRODUCTS_SUCCESS_CREATE:
+            return {loading: false, error: null, products: [...state.products, action.payload]}
+
+        case ProductActionTypes.FETCH_PRODUCTS_ERROR_CREATE:
+            return {loading: false, error: action.payload, products: []}
+
 
         default:
             return state

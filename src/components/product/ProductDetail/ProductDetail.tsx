@@ -1,11 +1,10 @@
 import React, {FC,useEffect, useState} from 'react'
-import {Link, useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import './productDetail.scss'
 import {Button, ImageList, ImageListItem, Typography} from "@mui/material";
 import {useActions} from "../../../hooks/useActions";
-import {useTypeSelector} from "../../../hooks/useTypeSelector";
 
 type ProductType = {
     id?: string,
@@ -23,6 +22,7 @@ interface ProductsProps{
 
 
 const ProductDetail = () => {
+    let navigate = useNavigate();
     const {fetchGetProduct} = useActions()
     const [productOne, setProductOne] = useState<any>('')
     const {search} = useLocation();
@@ -41,7 +41,7 @@ const ProductDetail = () => {
 
     return (
         <ButtonAppBar>
-            <Link to={'/'} style={{ textDecoration: "none"}}><Button variant="outlined">Home</Button></Link>
+                <Button onClick={() => navigate("/")} variant="outlined">Home</Button>
             <div className='productCard'>
                     <div className='productCard__img'>
                         <ImageList sx={{ width: 500, height: 500}} cols={3} rowHeight={164}>

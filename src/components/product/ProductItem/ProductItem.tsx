@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Button, Grid, ImageList, ImageListItem, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
 import './productItem.scss'
 import {useNavigate, Link} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
@@ -61,11 +60,6 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
                     <Button onClick={productDelete} variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
-                    <Link to={'/create'} style={{ textDecoration: "none"}}>
-                        <Button  variant="contained" endIcon={<SendIcon />}>
-                            Create
-                        </Button>
-                    </Link>
                 </Stack>
             </Grid>
         </>
