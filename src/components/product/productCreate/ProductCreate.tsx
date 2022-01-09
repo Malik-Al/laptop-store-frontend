@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import useInput from "../../../hooks/useInput";
-import axios from "axios";
 import {useNavigate } from "react-router-dom";
 import {Button, Grid, Stack, TextField} from "@mui/material";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import FileUpload from "./FileUpload";
 import SendIcon from "@mui/icons-material/Send";
-import {useTypeSelector} from "../../../hooks/useTypeSelector";
 import {useActions} from "../../../hooks/useActions";
 
 
@@ -18,8 +16,6 @@ const ProductCreate = () => {
     const name = useInput('')
     const description = useInput('')
     const price = useInput('')
-
-
 
 
     const next = async () => {
@@ -55,7 +51,13 @@ const ProductCreate = () => {
                     rows={3}
                 />
                 <FileUpload setFile={setPicture}  accept='image/*'>
-                    <Button>Загрузить изображение</Button>
+                    <Button
+                        variant="outlined"
+                        style={{
+                            marginTop: '10px',
+                            marginBottom: '10px'
+                        }}
+                    >Загрузить изображение</Button>
                 </FileUpload>
                 {picture ?
                     <div style={{fontSize: '20px'}}>

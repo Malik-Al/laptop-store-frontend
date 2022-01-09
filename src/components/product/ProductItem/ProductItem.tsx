@@ -1,8 +1,9 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {Button, Grid, ImageList, ImageListItem, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
 import './productItem.scss'
-import {useNavigate, Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
 
 
@@ -59,6 +60,9 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
                 <Stack direction="row" spacing={2}>
                     <Button onClick={productDelete} variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
+                    </Button>
+                    <Button onClick={() => navigate("/update")} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
+                        Update
                     </Button>
                 </Stack>
             </Grid>
