@@ -58,8 +58,8 @@ export const fetchCreateProduct = (name: string, description: string, price: str
                 formData.append('picture', picture)
                 await axios.post(`http://localhost:5000/product/`, formData).then(res => {
                 dispatch({type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_CREATE, payload: res.data})
-            }).catch(err => {
-                    dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR_CREATE, payload: err.message})
+            }).catch(error => {
+                    dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR_CREATE, payload: error.message})
                 })
         }catch (e){
             console.log(e)

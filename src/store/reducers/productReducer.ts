@@ -33,10 +33,10 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
 
         // GET ONE
         case ProductActionTypes.FETCH_PRODUCTS_ONE:
-            return {loading: true, error: null, products: []}
+            return {...state,loading: true, error: null}
 
         case ProductActionTypes.FETCH_PRODUCTS_SUCCESS_ONE:
-            return {loading: false, error: null, products: action.payload}
+            return {loading: false, error: null, products: [...state.products, action.payload]}
 
         case ProductActionTypes.FETCH_PRODUCTS_ERROR_ONE:
             return {loading: false, error: action.payload, products: []}

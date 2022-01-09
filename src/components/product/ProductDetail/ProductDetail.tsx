@@ -28,9 +28,9 @@ const ProductDetail = () => {
     const {search} = useLocation();
     const id = search.slice(1)
 
-    const OneRequest = async () => {
+    const OneRequest = () => {
         axios.get(`http://localhost:5000/product/${id}`).then(res => setProductOne(res.data))
-        // await fetchGetProduct(id)
+        // setProductOne(fetchGetProduct(id))
     }
 
     useEffect(() => {

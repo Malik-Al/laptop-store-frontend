@@ -26,23 +26,22 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
     const {fetchDeleteProduct} = useActions()
 
 
-    function handleClick() {
+    function handleGetIdProductClick(url: string){
         navigate({
-            pathname: 'detail',
+            pathname: url,
             search: product.id
         })
-    };
+    }
 
     async function productDelete() {
         await fetchDeleteProduct(product.id)
     }
 
 
-
     return (
         <>
             <Grid className='card'>
-                <ImageList onClick={handleClick} sx={{ width: 300, height: 300, padding: '10px'}} cols={3} rowHeight={164}>
+                <ImageList onClick={() => handleGetIdProductClick('detail')} sx={{ width: 300, height: 300, padding: '10px'}} cols={3} rowHeight={164}>
                     <ImageListItem sx={{width: '300%'}}>
                         {product.id &&
                             <img
@@ -61,7 +60,7 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
                     <Button onClick={productDelete} variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
-                    <Button onClick={() => navigate("/update")} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
+                    <Button onClick={() => handleGetIdProductClick('update')} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
                         Update
                     </Button>
                 </Stack>
