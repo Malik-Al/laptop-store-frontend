@@ -53,6 +53,17 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
             return {loading: false, error: action.payload, products: []}
 
 
+        // UPDATE
+        case ProductActionTypes.FETCH_PRODUCTS_UPDATE:
+            return {...state,loading: true, error: null}
+
+        case ProductActionTypes.FETCH_PRODUCTS_SUCCESS_UPDATE:
+            return {loading: false, error: null, products: [...state.products, action.payload]}
+
+        case ProductActionTypes.FETCH_PRODUCTS_ERROR_UPDATE:
+            return {loading: false, error: action.payload, products: []}
+
+
         default:
             return state
     }

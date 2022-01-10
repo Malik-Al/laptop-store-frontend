@@ -18,7 +18,7 @@ const ProductCreate = () => {
     const price = useInput('')
 
 
-    const next = async () => {
+    const createProductRequest = async () => {
         await fetchCreateProduct(
             name.value,
             description.value,
@@ -72,7 +72,7 @@ const ProductCreate = () => {
                     : null
                 }
                 <Stack direction="row" spacing={2}>
-                    <Button onClick={next} variant="contained" endIcon={<SendIcon />}>
+                    <Button onClick={createProductRequest} variant="contained" endIcon={<SendIcon />}>
                         Save
                     </Button>
                 </Stack>

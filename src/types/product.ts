@@ -13,7 +13,11 @@ export enum ProductActionTypes {
 
     FETCH_PRODUCTS_CREATE = 'FETCH_PRODUCTS_CREATE',
     FETCH_PRODUCTS_SUCCESS_CREATE = 'FETCH_PRODUCTS_SUCCESS_CREATE',
-    FETCH_PRODUCTS_ERROR_CREATE = 'FETCH_PRODUCTS_ERROR_CREATE'
+    FETCH_PRODUCTS_ERROR_CREATE = 'FETCH_PRODUCTS_ERROR_CREATE',
+
+    FETCH_PRODUCTS_UPDATE = 'FETCH_PRODUCTS_UPDATE',
+    FETCH_PRODUCTS_SUCCESS_UPDATE = 'FETCH_PRODUCTS_SUCCESS_UPDATE',
+    FETCH_PRODUCTS_ERROR_UPDATE = 'FETCH_PRODUCTS_ERROR_UPDATE'
 }
 
 
@@ -91,6 +95,21 @@ interface FetchProductsErrorActionCreate {
     payload: string
 }
 
+// update product
+
+interface FetchProductsActionUpdate {
+    type: ProductActionTypes.FETCH_PRODUCTS_UPDATE
+}
+
+interface FetchProductsSuccessActionUpdate {
+    type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_UPDATE,
+    payload: any[]
+}
+
+interface FetchProductsErrorActionUpdate {
+    type: ProductActionTypes.FETCH_PRODUCTS_ERROR_UPDATE,
+    payload: string
+}
 
 export type ProductAction =
     FetchProductsAction
@@ -105,3 +124,6 @@ export type ProductAction =
     | FetchProductsActionCreate
     | FetchProductsSuccessActionCreate
     | FetchProductsErrorActionCreate
+    | FetchProductsActionUpdate
+    | FetchProductsSuccessActionUpdate
+    | FetchProductsErrorActionUpdate

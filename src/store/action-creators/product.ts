@@ -66,5 +66,26 @@ export const fetchCreateProduct = (name: string, description: string, price: str
             dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR_CREATE, payload: 'Error product create request'})
         }
     }
+}
 
+//Product update
+export const fetchUpdateProduct = (id: string, name: string, description: string, price: string, picture: string) => {
+    return async (dispatch: Dispatch<ProductAction>) => {
+        try {
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_UPDATE})
+            const formData = new FormData()
+                formData.append('name', name)
+                formData.append('description', description)
+                formData.append('price', price)
+                formData.append('picture', picture)
+            await axios.put(`http://localhost:5000/product/update/${id}`, formData).then(res => {
+                dispatch({type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_UPDATE, payload: res.data})
+            }).catch(error => {
+                dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR_UPDATE, payload: error.message})
+            })
+        }catch (e){
+            console.log(e)
+            dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR_UPDATE, payload: 'Error product update request'})
+        }
+    }
 }
