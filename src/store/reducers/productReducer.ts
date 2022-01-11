@@ -2,6 +2,7 @@ import {ProductAction, ProductActionTypes, ProductState} from "../../types/produ
 
 const initialState: ProductState = {
     products: [],
+    product: {},
     loading: false,
     error: null
 }
@@ -36,7 +37,7 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
             return {...state,loading: true, error: null}
 
         case ProductActionTypes.FETCH_PRODUCTS_SUCCESS_ONE:
-            return {loading: false, error: null, products: [...state.products, action.payload]}
+            return {...state,loading: false,error: null, product: action.payload}
 
         case ProductActionTypes.FETCH_PRODUCTS_ERROR_ONE:
             return {loading: false, error: action.payload, products: []}
@@ -59,6 +60,18 @@ export const productReducer = (state = initialState, action: ProductAction): Pro
 
         case ProductActionTypes.FETCH_PRODUCTS_SUCCESS_UPDATE:
             return {loading: false, error: null, products: [...state.products, action.payload]}
+
+            // return {loading: false, error: null, products: state.products.map((product) => {
+            //     if(product.id === action.payload.id){
+            //         return {
+            //             ...product,
+            //             ...action.payload
+            //         }
+            //     }else {
+            //         return product
+            //     }
+            //     }
+            // )}
 
         case ProductActionTypes.FETCH_PRODUCTS_ERROR_UPDATE:
             return {loading: false, error: action.payload, products: []}

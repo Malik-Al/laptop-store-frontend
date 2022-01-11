@@ -23,6 +23,7 @@ export enum ProductActionTypes {
 
 export interface ProductState {
     products: any[],
+    product?:any,
     loading: boolean,
     error: null | string
 }
@@ -69,7 +70,7 @@ interface FetchProductsActionOne {
 
 interface FetchProductsSuccessActionOne {
     type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_ONE,
-    payload: any[]
+    payload: any
 }
 
 interface FetchProductsErrorActionOne {
@@ -103,7 +104,7 @@ interface FetchProductsActionUpdate {
 
 interface FetchProductsSuccessActionUpdate {
     type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS_UPDATE,
-    payload: any[]
+    payload: any
 }
 
 interface FetchProductsErrorActionUpdate {

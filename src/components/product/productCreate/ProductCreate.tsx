@@ -6,6 +6,8 @@ import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import FileUpload from "./FileUpload";
 import SendIcon from "@mui/icons-material/Send";
 import {useActions} from "../../../hooks/useActions";
+import Alert from '@mui/material/Alert';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 
@@ -16,9 +18,15 @@ const ProductCreate = () => {
     const name = useInput('')
     const description = useInput('')
     const price = useInput('')
+    const [error, setError] = useState('')
 
 
     const createProductRequest = async () => {
+        if(!name || !description || !price || !picture) {
+            return (
+                setError('Пожалуйста заполните все поля')
+            )
+        }
         await fetchCreateProduct(
             name.value,
             description.value,
@@ -31,6 +39,16 @@ const ProductCreate = () => {
 
     return (
         <ButtonAppBar>
+            {error &&
+                <Stack sx={{ width: '100%', marginBottom: '40px' }} spacing={2}>
+                    <div onClick={() => setError('')}
+                         style={{display: 'flex', justifyContent: 'flex-end', cursor: 'pointer'}}
+                    >
+                        <CloseIcon/>
+                    </div>
+                    <Alert severity="error">{error}</Alert>
+                </Stack>
+            }
                 <Button onClick={() => navigate("/")} variant="outlined">Home</Button>
             <Grid container direction="column" style={{padding: 10}}>
                 <TextField
