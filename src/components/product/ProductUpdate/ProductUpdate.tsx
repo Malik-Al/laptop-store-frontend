@@ -4,53 +4,52 @@ import {Button, Grid, Stack, TextField} from "@mui/material";
 import FileUpload from "../productCreate/FileUpload";
 import SendIcon from "@mui/icons-material/Send";
 import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
 import {useActions} from "../../../hooks/useActions";
 import {useTypeSelector} from "../../../hooks/useTypeSelector";
+import {fetchGetProduct, fetchUpdateProduct} from "../../../store/action-creators/product";
 
 const ProductUpdate = () => {
-    const {products} = useTypeSelector<any>(state => state.product)
+    const [pictureOne, setPicture] = useState<any>(null)
+    const {product} = useTypeSelector(state => state.product)
     let navigate = useNavigate();
-    const [productOne, setProductOne] = useState<any>('')
-    const {fetchUpdateProduct} = useActions()
+    const {fetchUpdateProduct, fetchGetProduct} = useActions()
     const {search} = useLocation();
-    const id = search.slice(1)
-
-    const OneRequest = () => {
-        axios.get(`http://localhost:5000/product/${id}`).then(res => setProductOne(res.data))
-    }
-
-    useEffect(() => {
-        OneRequest()
-    }, [])
-
-
-    // const [picture, setPicture] = useState<any>(null)
-
-    // const name = useInput('')
-    // const description = useInput('')
-    // const price = useInput('')
+    const productId = search.slice(1)
 
 
 
-    // const [name, setName] = useState(productOne.name);
-    // const [description, setDescription] = useState(productOne.description);
-    // const [price, setPrice] = useState(productOne.price);
 
-/////////////////////////////////////////
     const [state, setState] = useState({
+        id: '',
         name: '' ,
         description: '',
         price: '',
         picture: ''
     })
-    const {name, price, description, picture} = state
+
+    const {id, name, description, price, picture} = state
+
+    const updateProductRequest = async () => {
+        await fetchUpdateProduct(
+            productId,
+            name,
+            description,
+            price,
+            picture
+        )
+        navigate("/")
+    }
 
     useEffect(() => {
-        if(productOne){
-            setState({...productOne})
+        fetchGetProduct(productId)
+    }, [])
+
+
+    useEffect(() => {
+        if(product){
+            setState({...product})
         }
-    }, [productOne])
+    }, [product])
 
 
     const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,39 +57,11 @@ const ProductUpdate = () => {
         setState({...state, [name]: value})
     };
 
+
 ///////////////////////////////////////////
 
     // let pict = picture ? picture.name: productOne.picture
     // console.log('picture.name:',pict)
-
-    const updateProductRequest = async () => {
-        await fetchUpdateProduct(
-            id,
-            state
-        )
-        navigate("/")
-    }
-
-////////////////////////////////////////////////
-
-
-    // const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     setName(event.target.value)
-    //     // console.log(name)
-    // };
-    //
-    // const handleChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     setPrice(event.target.value);
-    //     // console.log(price)
-    //
-    // };
-    //
-    // const handleChangeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     setDescription(event.target.value);
-    //     // console.log(description)
-    //
-    // };
-
 
 
     return (
@@ -121,7 +92,7 @@ const ProductUpdate = () => {
                         multiline
                         rows={3}
                     />
-                    {picture ?
+                    {pictureOne ?
                         <div style={{fontSize: '20px'}}>
                             Название файла:
                             <h5 style={{
@@ -129,27 +100,28 @@ const ProductUpdate = () => {
                                 paddingBottom: '10px',
                                 color: '#0077ff',
                                 fontSize: '25px'
-                            }}>{picture}</h5>
+                            }}>{pictureOne}</h5>
                         </div>
                         :
-                        productOne.id &&
-                        <div style={{width: 300,height: 300, marginTop: '10px'}}>
-                            <img
-                                style={{width: 250}}
-                                src={`${`http://localhost:5000/`+productOne.picture}?w=164&h=164&fit=crop&auto=format`}
-                            />
-                        </div>
+                        id &&
+                            <div style={{width: 300, height: 300, marginTop: '10px'}}>
+                                <img
+                                    style={{width: 250}}
+                                    src={`${`http://localhost:5000/` + picture}?w=164&h=164&fit=crop&auto=format`}
+                                />
+                            </div>
+
                     }
 
-                    {/*<FileUpload setFile={setPicture}  accept='image/*'>*/}
-                    {/*    <Button*/}
-                    {/*        variant="outlined"*/}
-                    {/*        style={{*/}
-                    {/*            marginTop: '10px',*/}
-                    {/*            marginBottom: '10px'*/}
-                    {/*        }}*/}
-                    {/*    >Изменить изображение</Button>*/}
-                    {/*</FileUpload>*/}
+                    <FileUpload setFile={setPicture}  accept='image/*'>
+                        <Button
+                            variant="outlined"
+                            style={{
+                                marginTop: '10px',
+                                marginBottom: '10px'
+                            }}
+                        >Изменить изображение</Button>
+                    </FileUpload>
 
                     <Stack direction="row" spacing={2}>
                         <Button
