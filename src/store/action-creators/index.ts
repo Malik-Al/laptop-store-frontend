@@ -1,5 +1,5 @@
-import * as UserActionCreators from './laptop'
+import * as LaptopActionCreators from './laptop'
 
 export default {
-    ...UserActionCreators
-}
+    ...LaptopActionCreators
+ }

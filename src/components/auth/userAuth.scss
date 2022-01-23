@@ -1,0 +1,23 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  &__title{
+    display: flex;
+    justify-content: center;
+  }
+  &__input{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__text{
+    padding-top: 10px;
+    cursor: pointer;
+  }
+  &__btn{
+    width: 100px;
+    margin-top: 5px;
+  }
+
+}

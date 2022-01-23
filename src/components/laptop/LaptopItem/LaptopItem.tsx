@@ -5,7 +5,6 @@ import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
 import './laptopItem.scss'
 import {useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
-import LaptopList from "../LaptopList/LaptopList";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
