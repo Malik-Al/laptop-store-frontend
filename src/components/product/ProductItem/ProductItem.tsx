@@ -5,6 +5,7 @@ import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
 import './productItem.scss'
 import {useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
 type ProductType = {
@@ -25,7 +26,6 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
     let navigate = useNavigate()
     const {fetchDeleteProduct} = useActions()
 
-
     function handleGetIdProductClick(url: string){
         navigate({
             pathname: url,
@@ -45,8 +45,8 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
                     <ImageListItem sx={{width: '300%'}}>
                         {product.id &&
                             <img
-                                src={`${`http://localhost:5000/`+product.picture}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${`http://localhost:5000/`+product.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                src={`${`${SERVER_URL}/`+product.picture}?w=164&h=164&fit=crop&auto=format`}
+                                srcSet={`${`${SERVER_URL}/`+product.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                 loading="lazy"
                             />
                         }

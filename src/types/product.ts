@@ -80,7 +80,7 @@ interface FetchProductsErrorActionOne {
 
 
 
-// create product
+// create laptop
 
 interface FetchProductsActionCreate {
     type: ProductActionTypes.FETCH_PRODUCTS_CREATE
@@ -96,7 +96,7 @@ interface FetchProductsErrorActionCreate {
     payload: string
 }
 
-// update product
+// update laptop
 
 interface FetchProductsActionUpdate {
     type: ProductActionTypes.FETCH_PRODUCTS_UPDATE

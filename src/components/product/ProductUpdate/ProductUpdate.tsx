@@ -107,7 +107,7 @@ const ProductUpdate = () => {
                             <div style={{width: 300, height: 300, marginTop: '10px'}}>
                                 <img
                                     style={{width: 250}}
-                                    src={`${`http://localhost:5000/` + picture}?w=164&h=164&fit=crop&auto=format`}
+                                    src={`${`http://localhost:5002/` + picture}?w=164&h=164&fit=crop&auto=format`}
                                 />
                             </div>
 

@@ -6,6 +6,7 @@ import {Button, ImageList, ImageListItem, Typography} from "@mui/material";
 import {useActions} from "../../../hooks/useActions";
 import {useTypeSelector} from "../../../hooks/useTypeSelector";
 import {fetchGetProduct} from "../../../store/action-creators/product";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
 const ProductDetail = () => {
@@ -46,8 +47,8 @@ const ProductDetail = () => {
                             <ImageListItem sx={{width: '250%'}}>
                                 {id &&
                                     <img
-                                        src={`${`http://localhost:5000/`+picture}?w=164&h=164&fit=crop&auto=format`}
-                                        srcSet={`${`http://localhost:5000/`+picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                        src={`${`${SERVER_URL}/`+picture}?w=164&h=164&fit=crop&auto=format`}
+                                        srcSet={`${`${SERVER_URL}/`+picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                         loading="lazy"
                                     />
                                  }
