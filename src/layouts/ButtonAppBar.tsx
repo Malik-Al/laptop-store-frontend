@@ -16,8 +16,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {FC} from "react";
 import ComputerIcon from '@mui/icons-material/Computer';
-import {Link} from "react-router-dom";
-import {Button} from "@mui/material";
+import {Link, useNavigate} from "react-router-dom";
+import {Avatar, Button, Stack} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
 const drawerWidth = 200;
@@ -27,12 +27,13 @@ interface Props {
 }
 
 const ButtonAppBar: FC<Props> = ({window, children}) =>{
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    let navigate = useNavigate();
 
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const container = window !== undefined ? () => window().document.body : undefined;
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
     const drawer = (
         <div>
             <Toolbar />
@@ -59,9 +60,6 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
             </List>
         </div>
     );
-
-    const container = window !== undefined ? () => window().document.body : undefined;
-
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -84,17 +82,34 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography
+                        variant="h6"
+                        noWrap component="div"
+                        onClick={() => navigate("/")}
+                        style={{cursor: "pointer"}}
+                    >
                         Responsive drawer
                     </Typography>
                     <Link to={'/create'} style={{
                         textDecoration: "none",
-                        marginLeft: '500px'
+                        marginLeft: '400px',
                     }}>
                         <Button  variant="contained" endIcon={<SendIcon />}>
                             Create product
                         </Button>
                     </Link>
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                        style={{marginLeft:'50px'}}
+                        onClick={() => navigate("/login")}
+                    >
+                        <Avatar
+                            alt="Remy Sharp"
+                            src=''
+                            sx={{ width: 36, height: 36 }}
+                        />
+                    </Stack>
                 </Toolbar>
             </AppBar>
             <Box
