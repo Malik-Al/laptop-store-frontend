@@ -2,13 +2,14 @@ import React, {FC} from 'react';
 import {Button, Grid, ImageList, ImageListItem, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
-import './productItem.scss'
+import './laptopItem.scss'
 import {useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
+import LaptopList from "../LaptopList/LaptopList";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
-type ProductType = {
+type LaptopType = {
     id: string,
     name: string;
     picture: string;
@@ -16,51 +17,51 @@ type ProductType = {
 }
 
 
-interface ProductsProps{
-    product: ProductType
+interface LaptopsProps{
+    laptop: LaptopType
 }
 
 
-const ProductItem: FC<ProductsProps> = ({product}) => {
+const LaptopItem: FC<LaptopsProps> = ({laptop}) => {
 
     let navigate = useNavigate()
-    const {fetchDeleteProduct} = useActions()
+    const {fetchDeleteLaptop} = useActions()
 
-    function handleGetIdProductClick(url: string){
+    function handleGetIdLaptopClick(url: string){
         navigate({
             pathname: url,
-            search: product.id
+            search: laptop.id
         })
     }
 
-    async function productDelete() {
-        await fetchDeleteProduct(product.id)
+    async function LaptopDelete() {
+        await fetchDeleteLaptop(laptop.id)
     }
 
 
     return (
         <>
             <Grid className='card'>
-                <ImageList onClick={() => handleGetIdProductClick('detail')} sx={{ width: 300, height: 300, padding: '10px'}} cols={3} rowHeight={164}>
+                <ImageList onClick={() => handleGetIdLaptopClick('detail')} sx={{ width: 300, height: 300, padding: '10px'}} cols={3} rowHeight={164}>
                     <ImageListItem sx={{width: '300%'}}>
-                        {product.id &&
+                        {laptop.id &&
                             <img
-                                src={`${`${SERVER_URL}/`+product.picture}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${`${SERVER_URL}/`+product.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                src={`${`${SERVER_URL}/`+laptop.picture}?w=164&h=164&fit=crop&auto=format`}
+                                srcSet={`${`${SERVER_URL}/`+laptop.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                 loading="lazy"
                             />
                         }
                     </ImageListItem>
                 </ImageList>
                 <div className='card__title'>
-                    <h4>{product.price} p</h4>
-                    <div>{product.name}</div>
+                    <h4>{laptop.price} p</h4>
+                    <div>{laptop.name}</div>
                 </div>
                 <Stack direction="row" spacing={2}>
-                    <Button onClick={productDelete} variant="outlined" startIcon={<DeleteIcon />}>
+                    <Button onClick={LaptopDelete} variant="outlined" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
-                    <Button onClick={() => handleGetIdProductClick('update')} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
+                    <Button onClick={() => handleGetIdLaptopClick('update')} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
                         Update
                     </Button>
                 </Stack>
@@ -71,4 +72,4 @@ const ProductItem: FC<ProductsProps> = ({product}) => {
 };
 
 
-export default ProductItem;
+export default LaptopItem;

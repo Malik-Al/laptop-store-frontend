@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import {Button, Grid, Stack, TextField} from "@mui/material";
-import FileUpload from "../productCreate/FileUpload";
+import FileUpload from "../LaptopCreate/FileUpload";
 import SendIcon from "@mui/icons-material/Send";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
 import {useTypeSelector} from "../../../hooks/useTypeSelector";
-import {fetchGetProduct, fetchUpdateProduct} from "../../../store/action-creators/product";
+import {fetchGetLaptop, fetchUpdateLaptop} from "../../../store/action-creators/laptop";
 
-const ProductUpdate = () => {
+const LaptopUpdate = () => {
     const [pictureOne, setPicture] = useState<any>(null)
-    const {product} = useTypeSelector(state => state.product)
+    const {laptop} = useTypeSelector(state => state.laptop)
     let navigate = useNavigate();
-    const {fetchUpdateProduct, fetchGetProduct} = useActions()
+    const {fetchUpdateLaptop, fetchGetLaptop} = useActions()
     const {search} = useLocation();
-    const productId = search.slice(1)
+    const laptopId = search.slice(1)
 
 
 
@@ -30,8 +30,8 @@ const ProductUpdate = () => {
     const {id, name, description, price, picture} = state
 
     const updateProductRequest = async () => {
-        await fetchUpdateProduct(
-            productId,
+        await fetchUpdateLaptop(
+            laptopId,
             name,
             description,
             price,
@@ -41,15 +41,15 @@ const ProductUpdate = () => {
     }
 
     useEffect(() => {
-        fetchGetProduct(productId)
+        fetchGetLaptop(laptopId)
     }, [])
 
 
     useEffect(() => {
-        if(product){
-            setState({...product})
+        if(laptop){
+            setState({...laptop})
         }
-    }, [product])
+    }, [laptop])
 
 
     const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,4 +137,4 @@ const ProductUpdate = () => {
     );
 };
 
-export default ProductUpdate;
+export default LaptopUpdate;

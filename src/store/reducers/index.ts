@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import {productReducer} from "./productReducer";
+import {laptopReducer} from "./laptopReducer";
 
 export const rootReducer = combineReducers({
-    product: productReducer
+    laptop: laptopReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -1,40 +1,40 @@
 import React, {useEffect, useState} from 'react'
 import {useLocation, useNavigate} from "react-router-dom";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
-import './productDetail.scss'
+import './laptopDetail.scss'
 import {Button, ImageList, ImageListItem, Typography} from "@mui/material";
 import {useActions} from "../../../hooks/useActions";
 import {useTypeSelector} from "../../../hooks/useTypeSelector";
-import {fetchGetProduct} from "../../../store/action-creators/product";
+import {fetchGetLaptop} from "../../../store/action-creators/laptop";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
-const ProductDetail = () => {
-    const {product} = useTypeSelector(state => state.product)
+const LaptopDetail = () => {
+    const {laptop} = useTypeSelector(state => state.laptop)
     let navigate = useNavigate();
-    const {fetchGetProduct} = useActions()
+    const {fetchGetLaptop} = useActions()
     const {search} = useLocation();
-    const idProduct = search.slice(1)
+    const idLaptop = search.slice(1)
 
 
-    const [productOne, setProductOne] = useState({
+    const [laptopOne, setLaptopOne] = useState({
         id: '',
         name: '' ,
         description: '',
         price: '',
         picture: ""
     })
-    const {name, price, description, picture, id} = productOne
+    const {name, price, description, picture, id} = laptopOne
 
     useEffect(() => {
-        fetchGetProduct(idProduct)
+        fetchGetLaptop(idLaptop)
     }, [])
 
     useEffect(() => {
-        if(product){
-            setProductOne({...product})
+        if(laptop){
+            setLaptopOne({...laptop})
         }
-    }, [product])
+    }, [laptop])
 
 
 
@@ -74,4 +74,4 @@ const ProductDetail = () => {
     );
 };
 
-export default ProductDetail;
+export default LaptopDetail;

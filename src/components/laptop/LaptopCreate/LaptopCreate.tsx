@@ -11,8 +11,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 
 
-const ProductCreate = () => {
-    const {fetchCreateProduct} = useActions()
+const LaptopCreate = () => {
+    const {fetchCreateLaptop} = useActions()
     let navigate = useNavigate();
     const [picture, setPicture] = useState<any>(null)
     const name = useInput('')
@@ -27,7 +27,7 @@ const ProductCreate = () => {
                 setError('Пожалуйста заполните все поля')
             )
         }
-        await fetchCreateProduct(
+        await fetchCreateLaptop(
             name.value,
             description.value,
             price.value,
@@ -99,4 +99,4 @@ const ProductCreate = () => {
     );
 };
 
-export default ProductCreate;
+export default LaptopCreate;

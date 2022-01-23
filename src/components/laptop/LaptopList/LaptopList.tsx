@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
-import ProductItem from "../ProductItem/ProductItem";
+import ProductItem from "../LaptopItem/LaptopItem";
 import {useTypeSelector} from "../../../hooks/useTypeSelector";
-import {fetchProduct} from "../../../store/action-creators/product";
+import {fetchLaptop} from "../../../store/action-creators/laptop";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import {useActions} from "../../../hooks/useActions";
 import {Box, CircularProgress} from "@mui/material";
 
 
-const ProductList = () => {
-    const {products, loading, error} = useTypeSelector(state => state.product)
-    const {fetchProduct} = useActions()
+const LaptopList = () => {
+    const {laptops, loading, error} = useTypeSelector(state => state.laptop)
+    const {fetchLaptop} = useActions()
 
     useEffect(() => {
-        fetchProduct()
+        fetchLaptop()
     }, [])
 
 
@@ -36,8 +36,8 @@ const ProductList = () => {
         <>
             <ButtonAppBar>
                 <div style={{display: 'flex',flexWrap: "wrap"}}>
-                    {products.map((product, id) =>
-                        <ProductItem key={id} product={product}/>,
+                    {laptops.map((laptop, id) =>
+                        <ProductItem key={id} laptop={laptop}/>,
                         )}
                 </div>
             </ButtonAppBar>
@@ -46,4 +46,4 @@ const ProductList = () => {
     );
 };
 
-export default ProductList;
+export default LaptopList;
