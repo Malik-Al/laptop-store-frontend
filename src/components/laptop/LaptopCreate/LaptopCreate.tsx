@@ -50,7 +50,7 @@ const LaptopCreate = () => {
                 </Stack>
             }
                 <Button onClick={() => navigate("/")} variant="outlined">Home</Button>
-            <Grid container direction="column" style={{padding: 10}}>
+            <Grid container direction="column" style={{padding: 10, width: 600}}>
                 <TextField
                     {...name}
                     style={{marginTop: 10}}

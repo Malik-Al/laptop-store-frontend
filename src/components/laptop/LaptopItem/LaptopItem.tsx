@@ -22,8 +22,8 @@ interface LaptopsProps{
 
 
 const LaptopItem: FC<LaptopsProps> = ({laptop}) => {
-
     let navigate = useNavigate()
+    let isAuth = false
     const {fetchDeleteLaptop} = useActions()
 
     function handleGetIdLaptopClick(url: string){
@@ -56,14 +56,16 @@ const LaptopItem: FC<LaptopsProps> = ({laptop}) => {
                     <h4>{laptop.price} p</h4>
                     <div>{laptop.name}</div>
                 </div>
-                <Stack direction="row" spacing={2}>
-                    <Button onClick={LaptopDelete} variant="outlined" startIcon={<DeleteIcon />}>
-                        Delete
-                    </Button>
-                    <Button onClick={() => handleGetIdLaptopClick('update')} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
-                        Update
-                    </Button>
-                </Stack>
+                { isAuth &&
+                    <Stack direction="row" spacing={2}>
+                        <Button onClick={LaptopDelete} variant="outlined" startIcon={<DeleteIcon />}>
+                            Delete
+                        </Button>
+                        <Button onClick={() => handleGetIdLaptopClick('update')} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
+                            Update
+                        </Button>
+                    </Stack>
+                }
             </Grid>
         </>
 

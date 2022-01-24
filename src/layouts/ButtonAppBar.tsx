@@ -28,6 +28,7 @@ interface Props {
 
 const ButtonAppBar: FC<Props> = ({window, children}) =>{
     let navigate = useNavigate();
+    let isAuth = false
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -63,90 +64,49 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
-                    color: 'black',
-                    backgroundColor: 'white'
-                }}
-            >
+            <AppBar position="fixed" sx={{width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, color: 'black', backgroundColor: 'white'}}>
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
-                    >
+                    <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap component="div"
-                        onClick={() => navigate("/")}
-                        style={{cursor: "pointer"}}
-                    >
-                        Responsive drawer
+                    <Typography variant="h6" noWrap component="div" onClick={() => navigate("/")} style={{cursor: "pointer"}}>
+                       Laptops application
                     </Typography>
-                    <Link to={'/create'} style={{
-                        textDecoration: "none",
-                        marginLeft: '400px',
-                    }}>
-                        <Button  variant="contained" endIcon={<SendIcon />}>
-                            Create product
-                        </Button>
-                    </Link>
-                    <Stack
-                        direction="row"
-                        spacing={2}
-                        style={{marginLeft:'50px'}}
-                        onClick={() => navigate("/login")}
-                    >
-                        <Avatar
-                            alt="Remy Sharp"
-                            src=''
-                            sx={{ width: 36, height: 36 }}
-                        />
-                    </Stack>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginLeft: '400px'
+                        }}>
+                            { isAuth &&
+                                <Button  onClick={() => navigate("/create")} variant="contained" endIcon={<SendIcon />}>
+                                    Create product
+                                </Button>
+                            }
+
+                            <Stack
+                                direction="row"
+                                spacing={2}
+                                style={{marginLeft:'60px'}}
+                                onClick={() => navigate("/login")}
+                            >
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src=''
+                                    sx={{ width: 36, height: 36 }}
+                                />
+                            </Stack>
+                        </div>
                 </Toolbar>
             </AppBar>
-            <Box
-                component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                aria-label="mailbox folders"
-            >
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
-                >
+            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+                <Drawer container={container} variant="temporary" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{keepMounted: true,}} sx={{display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },}}>
                     {drawer}
                 </Drawer>
-                <Drawer
-                    variant="permanent"
-                    sx={{
-                        display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
-                    open
-                >
+                <Drawer variant="permanent" sx={{display: { xs: 'none', sm: 'block' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },}} open>
                     {drawer}
                 </Drawer>
             </Box>
-            <Box
-                component="main"
-                sx={{ flexGrow: 2, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-            >
+            <Box component="main" sx={{ flexGrow: 2, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
                 <Toolbar />
                     {children}
             </Box>

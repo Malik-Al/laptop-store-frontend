@@ -67,7 +67,7 @@ const LaptopUpdate = () => {
     return (
         <ButtonAppBar>
             <Button onClick={() => navigate("/")} variant="outlined">Home</Button>
-                <Grid container direction="column" style={{padding: 10}}>
+                <Grid container direction="column" style={{padding: 10, width: 600}}>
                     <TextField
                         style={{marginTop: 10}}
                         value={name || ''}
