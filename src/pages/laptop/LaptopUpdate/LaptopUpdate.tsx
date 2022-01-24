@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import {Button, Grid, Stack, TextField} from "@mui/material";
-import FileUpload from "../LaptopCreate/FileUpload";
+import FileUpload from "../../../components/FileUpload";
 import SendIcon from "@mui/icons-material/Send";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
@@ -107,7 +107,7 @@ const LaptopUpdate = () => {
                             <div style={{width: 300, height: 300, marginTop: '10px'}}>
                                 <img
                                     style={{width: 250}}
-                                    src={`${`http://localhost:5002/` + picture}?w=164&h=164&fit=crop&auto=format`}
+                                    src={`${`${process.env.REACT_APP_SERVER_URL}/` + picture}?w=164&h=164&fit=crop&auto=format`}
                                 />
                             </div>
 

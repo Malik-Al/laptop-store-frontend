@@ -8,7 +8,7 @@ const UserRegistration = () => {
     let navigate = useNavigate();
     return (
         <ButtonAppBar>
-            <Card variant="outlined" className='login'>
+            <Card variant="outlined" className='auth'>
                 <Grid container direction="column" style={{padding: 10, width: 500}}>
                     <Typography variant="h5" className='login__title'>
                         Зарегистрироваться
@@ -38,11 +38,11 @@ const UserRegistration = () => {
                         name="password"
                     />
 
-                    <div className='login__input'>
-                        <Typography variant="h6" className='login__text' onClick={() => navigate("/login")}>
+                    <div className='auth__input'>
+                        <Typography variant="h6" className='auth__text' onClick={() => navigate("/login")}>
                             Авторизоваться
                         </Typography>
-                        <Stack spacing={2} direction="row" className='login__btn'>
+                        <Stack spacing={2} direction="row" className='auth__btn'>
                             <Button variant="outlined" >Отправить</Button>
                         </Stack>
                     </div>

@@ -3,7 +3,7 @@ import useInput from "../../../hooks/useInput";
 import {useNavigate } from "react-router-dom";
 import {Button, Grid, Stack, TextField} from "@mui/material";
 import ButtonAppBar from "../../../layouts/ButtonAppBar";
-import FileUpload from "./FileUpload";
+import FileUpload from "../../../components/FileUpload";
 import SendIcon from "@mui/icons-material/Send";
 import {useActions} from "../../../hooks/useActions";
 import Alert from '@mui/material/Alert';

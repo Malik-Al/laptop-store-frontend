@@ -82,12 +82,13 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                                     Create product
                                 </Button>
                             }
+                            <Button onClick={() => navigate("/login")} variant="outlined">Login</Button>
 
                             <Stack
                                 direction="row"
                                 spacing={2}
                                 style={{marginLeft:'60px'}}
-                                onClick={() => navigate("/login")}
+                                onClick={() => navigate("/profile")}
                             >
                                 <Avatar
                                     alt="Remy Sharp"
