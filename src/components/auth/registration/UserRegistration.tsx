@@ -3,9 +3,27 @@ import ButtonAppBar from "../../../layouts/ButtonAppBar";
 import {Button, Card, Grid, Stack, TextField, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import '../userAuth.scss'
+import useInput from "../../../hooks/useInput";
+import {useActions} from "../../../hooks/useActions";
+import {fetchRegister} from "../../../store/action-creators/auth";
 
 const UserRegistration = () => {
     let navigate = useNavigate();
+    const {fetchRegister} = useActions()
+    const email = useInput('')
+    const password = useInput('')
+    const firstname = useInput('')
+    const lastname = useInput('')
+
+    const register = () => {
+        fetchRegister(
+            email.value,
+            password.value,
+            firstname.value,
+            lastname.value)
+        navigate("/login")
+    }
+
     return (
         <ButtonAppBar>
             <Card variant="outlined" className='auth'>
@@ -17,25 +35,25 @@ const UserRegistration = () => {
                         style={{marginTop: 10}}
                         label={'Введите имя'}
                         type='text'
-                        name="firstname"
+                        {...firstname}
                     />
                     <TextField
                         style={{marginTop: 10}}
                         label={'Введите фамилию'}
                         type='text'
-                        name="lastname"
+                        {...lastname}
                     />
                     <TextField
                         style={{marginTop: 10}}
                         label={'Введите email'}
                         type='email'
-                        name="email"
+                        {...email}
                     />
                     <TextField
                         style={{marginTop: 10}}
                         label={'Введите пароль'}
                         type='password'
-                        name="password"
+                        {...password}
                     />
 
                     <div className='auth__input'>
@@ -43,7 +61,7 @@ const UserRegistration = () => {
                             Авторизоваться
                         </Typography>
                         <Stack spacing={2} direction="row" className='auth__btn'>
-                            <Button variant="outlined" >Отправить</Button>
+                            <Button onClick={register} variant="outlined" >Отправить</Button>
                         </Stack>
                     </div>
                 </Grid>

@@ -5,23 +5,19 @@ import {useNavigate} from "react-router-dom";
 import '../userAuth.scss'
 import useInput from "../../../hooks/useInput";
 import {useActions} from "../../../hooks/useActions";
-import {useTypeSelector} from "../../../hooks/useTypeSelector";
+import {fetchLoginLocalStorage} from "../../../store/action-creators/auth";
 
 
 const UserLogin = () => {
-    const {user, isAuth} = useTypeSelector(state => state.user)
-    console.log('user', user)
-    console.log('isAuth', isAuth)
-
-
 
     let navigate = useNavigate();
-    const {fetchLoginUser} = useActions()
+    const {fetchLoginLocalStorage} = useActions()
     const email = useInput('')
     const password = useInput('')
 
-    const login = async () => {
-       await fetchLoginUser(email.value, password.value)
+    const login = () => {
+       fetchLoginLocalStorage(email.value, password.value)
+       navigate("/profile")
     }
 
     return (

@@ -19,6 +19,8 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import {Link, useNavigate} from "react-router-dom";
 import {Avatar, Button, Stack} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import {useTypeSelector} from "../hooks/useTypeSelector";
+import {useActions} from "../hooks/useActions";
 
 const drawerWidth = 200;
 
@@ -28,7 +30,14 @@ interface Props {
 
 const ButtonAppBar: FC<Props> = ({window, children}) =>{
     let navigate = useNavigate();
-    let isAuth = false
+    const {isAuth} = useTypeSelector(state => state.user)
+    let isAuthAdmin = false
+    const {fetchLoginUser} = useActions()
+
+    function clearLogin(){
+        localStorage.clear()
+        fetchLoginUser()
+    }
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -77,12 +86,15 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                             justifyContent: "space-between",
                             marginLeft: '400px'
                         }}>
-                            { isAuth &&
+                            { isAuthAdmin &&
                                 <Button  onClick={() => navigate("/create")} variant="contained" endIcon={<SendIcon />}>
                                     Create product
                                 </Button>
                             }
-                            <Button onClick={() => navigate("/login")} variant="outlined">Login</Button>
+                            {!isAuth
+                                ? <Button onClick={() => navigate("/login")} variant="outlined">Login</Button>
+                                : <Button onClick={clearLogin} variant="outlined">Exit</Button>
+                            }
 
                             <Stack
                                 direction="row"
