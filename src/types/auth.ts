@@ -4,7 +4,7 @@ export enum AuthActionTypes {
     FETCH_AUTH_ERROR = 'FETCH_AUTH_ERROR'
 }
 export interface AuthState {
-    user: any[],
+    user: any,
     isAuth: boolean
     loading: boolean,
     error: null | string

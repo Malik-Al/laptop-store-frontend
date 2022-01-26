@@ -73,8 +73,8 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar position="fixed" sx={{width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, color: 'black', backgroundColor: 'white'}}>
-                <Toolbar>
+            <AppBar  position="fixed" sx={{width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, color: 'black', backgroundColor: 'white'}}>
+                <Toolbar >
                     <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
                         <MenuIcon />
                     </IconButton>
@@ -100,7 +100,7 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                                 direction="row"
                                 spacing={2}
                                 style={{marginLeft:'60px'}}
-                                onClick={() => navigate("/profile")}
+                                onClick={() => localStorage.getItem('user') ? navigate("/profile"):navigate("/login") }
                             >
                                 <Avatar
                                     alt="Remy Sharp"

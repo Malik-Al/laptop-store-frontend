@@ -9,12 +9,13 @@ import UserRegistration from "./components/auth/registration/UserRegistration";
 import Profile from "./pages/Profile";
 import {useActions} from "./hooks/useActions";
 
-const App = () => {
-    const {fetchLoginUser} = useActions()
 
-    useEffect(() => {
-        fetchLoginUser()
-    },[])
+const App = () => {
+    // const {fetchLoginUser} = useActions()
+    //
+    // useEffect(() => {
+    //     fetchLoginUser()
+    // },[])
 
 
     return (

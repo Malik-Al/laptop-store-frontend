@@ -2,7 +2,7 @@ import {AuthAction, AuthActionTypes, AuthState} from "../../types/auth";
 
 
 const initialState: AuthState = {
-    user: [],
+    user: {},
     isAuth: false,
     loading: false,
     error: null
@@ -14,10 +14,10 @@ export const userReducer = (state = initialState, action: AuthAction): AuthState
             return {...state,loading: true, error: null, isAuth: true }
 
         case AuthActionTypes.FETCH_AUTH_SUCCESS:
-            return {...state, user: [...state.user, action.payload], isAuth: true }
+            return {...state, user: action.payload, isAuth: true }
 
         case AuthActionTypes.FETCH_AUTH_ERROR:
-        return {loading: false, error: action.payload, user: [], isAuth: false }
+            return {loading: false, error: action.payload, user: [], isAuth: false }
 
         default:
             return state

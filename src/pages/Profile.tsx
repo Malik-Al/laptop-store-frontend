@@ -1,10 +1,30 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import ButtonAppBar from "../layouts/ButtonAppBar";
 import {useTypeSelector} from "../hooks/useTypeSelector";
 import {Card, CardContent, Typography} from "@mui/material";
+import {useActions} from "../hooks/useActions";
+
+
 
 const Profile = () => {
     const {user} = useTypeSelector(state => state.user)
+    const {fetchLoginUser} = useActions()
+    const [users, setUsers] = useState({
+        email: '' ,
+        lastname: '',
+        firstname: '',
+    })
+    const {email, lastname, firstname} = users
+
+    useEffect(() => {
+        fetchLoginUser()
+    },[])
+
+    useEffect(() => {
+        if(user){
+            setUsers({...user})
+        }
+    }, [user])
 
     return (
         <ButtonAppBar>
@@ -13,19 +33,17 @@ const Profile = () => {
                     <Typography variant="h4" component="div" sx={{display: 'flex', justifyContent: 'center',}}>
                         Profile
                     </Typography>
-                    {user.map((use, id) =>
-                        <CardContent key={id}>
+                    <CardContent >
                             <Typography variant="h5" component="div">
-                                Email: {use.email}
+                                Email: {email}
                             </Typography>
                             <Typography variant="h5" component="div">
-                                Фамилия: {use.lastname}
+                                Фамилия: {lastname}
                             </Typography>
                             <Typography variant="h5" component="div">
-                                Имя: {use.firstname}
+                                Имя: {firstname}
                             </Typography>
                         </CardContent>
-                    )}
                 </Card>
             </div>
         </ButtonAppBar>

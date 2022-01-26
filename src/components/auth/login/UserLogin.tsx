@@ -5,20 +5,21 @@ import {useNavigate} from "react-router-dom";
 import '../userAuth.scss'
 import useInput from "../../../hooks/useInput";
 import {useActions} from "../../../hooks/useActions";
-import {fetchLoginLocalStorage} from "../../../store/action-creators/auth";
+import {fetchLoginLocalStorage, fetchLoginUser} from "../../../store/action-creators/auth";
 
 
 const UserLogin = () => {
 
     let navigate = useNavigate();
-    const {fetchLoginLocalStorage} = useActions()
+    const {fetchLoginLocalStorage, fetchLoginUser} = useActions()
     const email = useInput('')
     const password = useInput('')
 
     const login = () => {
        fetchLoginLocalStorage(email.value, password.value)
-       navigate("/profile")
+       navigate("/")
     }
+
 
     return (
         <ButtonAppBar>

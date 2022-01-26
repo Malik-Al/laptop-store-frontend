@@ -39,15 +39,13 @@ export const fetchRegister = (email: string, password: string, firstname: string
 export const fetchLoginUser = () => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
+            dispatch({type: AuthActionTypes.FETCH_AUTH})
             const local: any = localStorage.getItem('user')
             const tokenName = JSON.parse(local)
             const users: any = jwt_decode(tokenName.token)
-            console.log('user', local)
-            dispatch({type: AuthActionTypes.FETCH_AUTH})
             dispatch({type: AuthActionTypes.FETCH_AUTH_SUCCESS, payload: users})
-
-        }catch (e){
-            console.log(e)
+        }catch (e: any){
+            console.log(e.message)
             dispatch({type: AuthActionTypes.FETCH_AUTH_ERROR, payload: 'Error user login request'})
         }
     }
