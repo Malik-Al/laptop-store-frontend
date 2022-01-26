@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Route, Routes} from "react-router-dom"
 import LaptopList from "./pages/laptop/LaptopList/LaptopList";
 import LaptopDetail from "./pages/laptop/LaptopDetail/LaptopDetail";
@@ -7,15 +7,9 @@ import LaptopUpdate from "./pages/laptop/LaptopUpdate/LaptopUpdate";
 import UserLogin from "./components/auth/login/UserLogin";
 import UserRegistration from "./components/auth/registration/UserRegistration";
 import Profile from "./pages/Profile";
-import {useActions} from "./hooks/useActions";
 
 
 const App = () => {
-    // const {fetchLoginUser} = useActions()
-    //
-    // useEffect(() => {
-    //     fetchLoginUser()
-    // },[])
 
 
     return (

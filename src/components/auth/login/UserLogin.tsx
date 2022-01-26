@@ -24,7 +24,7 @@ const UserLogin = () => {
     return (
         <ButtonAppBar>
             <Card variant="outlined" className='auth'>
-                    <Grid container direction="column" style={{padding: 10, width: 500}}>
+                    <Grid container direction="column" style={{padding: 10, width: 400}}>
                         <Typography variant="h5" className='login__title'>
                             Авторизоваться
                         </Typography>

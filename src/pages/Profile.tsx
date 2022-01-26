@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ButtonAppBar from "../layouts/ButtonAppBar";
 import {useTypeSelector} from "../hooks/useTypeSelector";
 import {Card, CardContent, Typography} from "@mui/material";

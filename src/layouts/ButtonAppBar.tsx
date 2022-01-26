@@ -16,7 +16,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {FC} from "react";
 import ComputerIcon from '@mui/icons-material/Computer';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Avatar, Button, Stack} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {useTypeSelector} from "../hooks/useTypeSelector";
@@ -74,11 +74,11 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar  position="fixed" sx={{width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, color: 'black', backgroundColor: 'white'}}>
-                <Toolbar >
+                <Toolbar style={{minHeight: 0}}>
                     <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div" onClick={() => navigate("/")} style={{cursor: "pointer"}}>
+                    <Typography sx={{fontSize: 20}} variant="h6" noWrap component="div" onClick={() => navigate("/")} style={{cursor: "pointer"}}>
                        Laptops application
                     </Typography>
                         <div style={{
@@ -92,8 +92,8 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                                 </Button>
                             }
                             {!isAuth
-                                ? <Button onClick={() => navigate("/login")} variant="outlined">Login</Button>
-                                : <Button onClick={clearLogin} variant="outlined">Exit</Button>
+                                ? <Button onClick={() => navigate("/login")} >Login</Button>
+                                : <Button onClick={clearLogin} >Exit</Button>
                             }
 
                             <Stack
@@ -105,7 +105,7 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                                 <Avatar
                                     alt="Remy Sharp"
                                     src=''
-                                    sx={{ width: 36, height: 36 }}
+                                    sx={{ width: 33, height: 33 }}
                                 />
                             </Stack>
                         </div>

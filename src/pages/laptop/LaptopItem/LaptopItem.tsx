@@ -1,10 +1,14 @@
 import React, {FC} from 'react';
-import {Button, Grid, ImageList, ImageListItem, Stack} from "@mui/material";
+import {Button} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
 import './laptopItem.scss'
 import {useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 
@@ -39,36 +43,37 @@ const LaptopItem: FC<LaptopsProps> = ({laptop}) => {
 
 
     return (
-        <>
-            <Grid className='card'>
-                <ImageList onClick={() => handleGetIdLaptopClick('detail')} sx={{ width: 300, height: 300, padding: '10px'}} cols={3} rowHeight={164}>
-                    <ImageListItem sx={{width: '300%'}}>
-                        {laptop.id &&
-                            <img
-                                src={`${`${SERVER_URL}/`+laptop.picture}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${`${SERVER_URL}/`+laptop.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                loading="lazy"
-                            />
-                        }
-                    </ImageListItem>
-                </ImageList>
-                <div className='card__title'>
-                    <h4>{laptop.price} p</h4>
-                    <div>{laptop.name}</div>
-                </div>
-                { isAuth &&
-                    <Stack direction="row" spacing={2}>
-                        <Button onClick={LaptopDelete} variant="outlined" startIcon={<DeleteIcon />}>
-                            Delete
-                        </Button>
-                        <Button onClick={() => handleGetIdLaptopClick('update')} variant="outlined" startIcon={<SystemUpdateAltIcon />}>
-                            Update
-                        </Button>
-                    </Stack>
-                }
-            </Grid>
-        </>
+        <div>
+            <CardMedia
+                onClick={() => handleGetIdLaptopClick('detail')}
+                component="img"
+                image={`${SERVER_URL}/`+laptop.picture}
+            />
+            <CardContent sx={{ flexGrow: 1}} style={{padding: '16px'}}>
+                <Typography gutterBottom variant="h5" component="h2">
+                    {laptop.name}
+                </Typography>
+                <Typography>
+                    {laptop.price}
+                </Typography>
+            </CardContent >
 
+            {isAuth &&
+                <CardActions>
+                    <Button
+                        size="small"
+                        startIcon={<DeleteIcon />}
+                        onClick={LaptopDelete}
+                    >Delete</Button>
+                    <Button
+                        size="small"
+                        startIcon={<SystemUpdateAltIcon />}
+                        onClick={() => handleGetIdLaptopClick('update')}
+                    >Edit</Button>
+                </CardActions>
+            }
+
+        </div>
     );
 };
 
