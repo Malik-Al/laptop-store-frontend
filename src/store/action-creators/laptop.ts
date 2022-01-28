@@ -85,10 +85,23 @@ export const fetchUpdateLaptop = (id: string, name: string, description: string,
                 dispatch({type: LaptopActionTypes.FETCH_LAPTOPS_ERROR_UPDATE, payload: err.message})
 
             })
-            // dispatch({type: LaptopActionTypes.FETCH_LAPTOPS_SUCCESS_UPDATE, payload: response.data})
         }catch (e){
             console.log(e)
             dispatch({type: LaptopActionTypes.FETCH_LAPTOPS_ERROR_UPDATE, payload: 'Error laptop update request'})
         }
     }
 }
+
+export const fetchLaptopSearch = (query: string) => {
+    return async (dispatch: Dispatch<LaptopAction>) => {
+        try {
+            dispatch({type: LaptopActionTypes.FETCH_LAPTOPS_ONE})
+            const response = await axios.get(`${SERVER_URL}/laptop/search?query=`+query)
+            dispatch({type: LaptopActionTypes.FETCH_LAPTOPS_SUCCESS_ONE, payload: response.data})
+        }catch (e){
+            console.log(e)
+            dispatch({type: LaptopActionTypes.FETCH_LAPTOPS_ERROR_ONE, payload: 'Error laptop get one request'})
+        }
+    }
+}
+

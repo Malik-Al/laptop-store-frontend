@@ -21,23 +21,28 @@ import {Avatar, Button, Stack} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {useTypeSelector} from "../hooks/useTypeSelector";
 import {useActions} from "../hooks/useActions";
+import SearchLaptop from "../components/SearchLaptop";
+
 
 const drawerWidth = 200;
-
 interface Props {
     window?: () => Window;
 }
 
+
 const ButtonAppBar: FC<Props> = ({window, children}) =>{
-    let navigate = useNavigate();
     const {isAuth} = useTypeSelector(state => state.user)
-    let isAuthAdmin = false
     const {fetchLoginUser} = useActions()
+    let navigate = useNavigate();
+    let isAuthAdmin = false
+
 
     function clearLogin(){
         localStorage.clear()
         fetchLoginUser()
     }
+
+
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -46,7 +51,16 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
     };
     const drawer = (
         <div>
-            <Toolbar />
+            <Typography
+                sx={{fontSize: 20, padding: 1, marginBottom: 2}}
+                variant="h6"
+                noWrap
+                component="div"
+                onClick={() => navigate("/")}
+                style={{cursor: "pointer"}}
+            >
+                Laptops application
+            </Typography>
             <List>
                 {['Acer', 'Asus', 'Lenova', 'Dell'].map((text, index) => (
                     <ListItem button key={text}>
@@ -75,19 +89,24 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
             <CssBaseline />
             <AppBar  position="fixed" sx={{width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, color: 'black', backgroundColor: 'white'}}>
                 <Toolbar style={{minHeight: 0}}>
-                    <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
+                    >
                         <MenuIcon />
                     </IconButton>
-                    <Typography sx={{fontSize: 20}} variant="h6" noWrap component="div" onClick={() => navigate("/")} style={{cursor: "pointer"}}>
-                       Laptops application
-                    </Typography>
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginLeft: '400px'
-                        }}>
+                       {/*<SearchLaptop/>*/}
+                        <div style={{display: "flex", margin: 'auto'}}></div>
                             { isAuthAdmin &&
-                                <Button  onClick={() => navigate("/create")} variant="contained" endIcon={<SendIcon />}>
+                                <Button
+                                    onClick={() => navigate("/create")}
+                                    variant="contained"
+                                    endIcon={<SendIcon />}
+                                    style={{fontSize: 10}}
+                                >
                                     Create product
                                 </Button>
                             }
@@ -95,20 +114,18 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                                 ? <Button onClick={() => navigate("/login")} >Login</Button>
                                 : <Button onClick={clearLogin} >Exit</Button>
                             }
-
-                            <Stack
-                                direction="row"
-                                spacing={2}
-                                style={{marginLeft:'60px'}}
-                                onClick={() => localStorage.getItem('user') ? navigate("/profile"):navigate("/login") }
-                            >
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src=''
-                                    sx={{ width: 33, height: 33 }}
-                                />
-                            </Stack>
-                        </div>
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                        style={{marginLeft:'60px'}}
+                        onClick={() => localStorage.getItem('user') ? navigate("/profile"):navigate("/login") }
+                    >
+                        <Avatar
+                            alt="Remy Sharp"
+                            src=''
+                            sx={{ width: 33, height: 33 }}
+                        />
+                    </Stack>
                 </Toolbar>
             </AppBar>
             <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">

@@ -6,7 +6,7 @@ import LaptopCreate from "./pages/laptop/LaptopCreate/LaptopCreate";
 import LaptopUpdate from "./pages/laptop/LaptopUpdate/LaptopUpdate";
 import UserLogin from "./components/auth/login/UserLogin";
 import UserRegistration from "./components/auth/registration/UserRegistration";
-import Profile from "./pages/Profile";
+import Profile from "./components/Profile";
 
 
 const App = () => {

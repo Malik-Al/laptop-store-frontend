@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import {Button} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
-import './laptopItem.scss'
 import {useNavigate} from "react-router-dom";
 import {useActions} from "../../../hooks/useActions";
 import CardMedia from "@mui/material/CardMedia";
