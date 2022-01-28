@@ -51,30 +51,26 @@ const LaptopList = () => {
     return (
         <>
             <ButtonAppBar>
-                {laptop
-                    ?
                     <Container maxWidth="md">
                         <Grid container spacing={4} >
-                            <Grid item key={id} xs={12} sm={6} md={4}>
-                                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                    <LaptopItem key={id} laptop={laptop}/>
-                                </Card>
-                            </Grid>
-                        </Grid>
-                    </Container>
-                    :
-                    <Container maxWidth="md">
-                        <Grid container spacing={4} >
-                            {laptops.map((laptop, id) =>
+                            {laptop
+                                ?
                                 <Grid item key={id} xs={12} sm={6} md={4}>
                                     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                        <ProductItem key={id} laptop={laptop}/>,
+                                        <LaptopItem key={id} laptop={laptop}/>
                                     </Card>
                                 </Grid>
-                            )}
+                                :
+                                laptops.map((laptop, id) =>
+                                    <Grid item key={id} xs={12} sm={6} md={4}>
+                                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                                            <ProductItem key={id} laptop={laptop}/>,
+                                        </Card>
+                                    </Grid>
+                                    )
+                            }
                         </Grid>
                     </Container>
-                }
             </ButtonAppBar>
         </>
 

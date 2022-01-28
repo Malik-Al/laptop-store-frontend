@@ -46,7 +46,7 @@ const LaptopItem: FC<LaptopsProps> = ({laptop}) => {
             <CardMedia
                 onClick={() => handleGetIdLaptopClick('detail')}
                 component="img"
-                image={`${SERVER_URL}/`+laptop.picture}
+                image={`${SERVER_URL}/${laptop.picture}`}
             />
             <CardContent sx={{ flexGrow: 1}} style={{padding: '16px'}}>
                 <Typography gutterBottom variant="h5" component="h2">

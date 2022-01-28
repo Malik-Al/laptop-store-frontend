@@ -85,11 +85,6 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
     let navigate = useNavigate();
     let isAuthAdmin = false
 
-    function clearLogin(){
-        localStorage.clear()
-        fetchLoginUser()
-    }
-
 
     const search = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value)
@@ -103,6 +98,10 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
         )
     }
 
+    function clearLogin(){
+        localStorage.clear()
+        fetchLoginUser()
+    }
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -158,6 +157,7 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                     >
                         <MenuIcon />
                     </IconButton>
+                    {/*Search input*/}
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
