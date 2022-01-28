@@ -14,14 +14,16 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import {FC} from "react";
+import {FC, useState} from "react";
 import ComputerIcon from '@mui/icons-material/Computer';
 import {useNavigate} from "react-router-dom";
 import {Avatar, Button, Stack} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {useTypeSelector} from "../hooks/useTypeSelector";
 import {useActions} from "../hooks/useActions";
-import SearchLaptop from "../components/SearchLaptop";
+import SearchIcon from "@mui/icons-material/Search";
+import {alpha, styled} from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
 
 
 const drawerWidth = 200;
@@ -30,18 +32,76 @@ interface Props {
 }
 
 
+
+
+
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(1),
+        width: '400px',
+    },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: '12ch',
+            '&:focus': {
+                width: '20ch',
+            },
+        },
+    },
+}));
+
 const ButtonAppBar: FC<Props> = ({window, children}) =>{
     const {isAuth} = useTypeSelector(state => state.user)
-    const {fetchLoginUser} = useActions()
+    const {fetchLoginUser, fetchLaptopSearch} = useActions()
+    const [query, setQuery] = useState<string>('')
+    const [timer, setTimer] = useState<any>(null)
     let navigate = useNavigate();
     let isAuthAdmin = false
-
 
     function clearLogin(){
         localStorage.clear()
         fetchLoginUser()
     }
 
+
+    const search = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value)
+        if (timer){
+            clearTimeout(timer)
+        }
+        setTimer(
+            setTimeout(async function () {
+                await fetchLaptopSearch(e.target.value)
+            }, 500)
+        )
+    }
 
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -98,7 +158,17 @@ const ButtonAppBar: FC<Props> = ({window, children}) =>{
                     >
                         <MenuIcon />
                     </IconButton>
-                       {/*<SearchLaptop/>*/}
+                    <Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                            value={query}
+                            onChange={search}
+                        />
+                    </Search>
                         <div style={{display: "flex", margin: 'auto'}}></div>
                             { isAuthAdmin &&
                                 <Button
